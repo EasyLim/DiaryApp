@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require("electron")
 
 require('@electron/remote/main').initialize()
-//require("@electron/remote/main").enable(webContents)
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -14,8 +13,6 @@ const createWindow = () => {
         }
     })
 
-    // const remote = require('@electron/remote')
-    // remote.require('@electron/remote/main').enable(win.webContents)
     require('@electron/remote/main').enable(win.webContents)
 
     win.loadURL('http://localhost:3000')
