@@ -8,6 +8,7 @@
         "rootDir": "src",
         "target": "esnext",
         "module": "commonjs",
+        "strict": true,
         "allowUmdGlobalAccess": true,
         "baseUrl": "."
     }

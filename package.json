@@ -1,11 +1,14 @@
 {
-  "name": "DiaryApp",
+  "name": "mainichi",
   "version": "1.0.0",
   "description": "Application for everyday notes for diary",
+  "author": "EasyLim",
+  "license": "",
+  "repository": {
+    "url": "https://github.com/EasyLim/DiaryApp.git"
+  },
   "main": "electron/main.js",
   "homepage": "./",
-  "author": "EasyLim",
-  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -16,7 +19,9 @@
     "electron:start": "wait-on tcp:3000 && electron ."
   },
   "devDependencies": {
+    "@types/node": "^17.0.6",
     "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
@@ -49,5 +54,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "browser": {
+    "crypto": false,
+    "fs": false,
+    "path": false,
+    "os": false,
+    "net": false,
+    "stream": false,
+    "tls": false
   }
 }
