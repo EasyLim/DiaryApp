@@ -1,1 +1,1 @@
-# DiaryApp
+# Mainichi
