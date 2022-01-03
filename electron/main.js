@@ -4,13 +4,16 @@ require('@electron/remote/main').initialize()
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1600,
+        minWidth: 800,
+        height: 900,
+        minHeight: 600,
         webPreferences: {
             enableRemoteModule: true,
             nodeIntegration: true,
             contextIsolation: false
-        }
+        },
+        titleBarStyle: 'hidden'
     })
 
     require('@electron/remote/main').enable(win.webContents)

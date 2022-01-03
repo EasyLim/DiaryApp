@@ -8,16 +8,22 @@ const { app } = window.require('@electron/remote')
 
 export function Diary () : JSX.Element
 {
-    let [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(
-        JSON.parse(
-            fs.readFileSync(path.join(app.getAppPath(), 'notes.json'), 'utf-8' )
-        )
-    )
+    let parsed: {id: number, date: number, mood: number, text: string}[] = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'notes.json'), 'utf-8' ))
+    let result = parsed.map((note) => {
+        let result = {
+            id: note.id,
+            date: new Date(note.date),
+            mood: note.mood,
+            text: note.text
+        }
+        return result
+    })
+    let [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(result)
 
     return (
-        <div>
+        <div className="Diary">
             {notes.map((note: INoteProperties) => 
-                <Note noteData={note}/>
+                <Note noteData={note} key={note.id}/>
             )}
         </div>
     )
