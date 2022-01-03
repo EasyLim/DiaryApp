@@ -1,6 +1,7 @@
 export interface INoteProperties {
-    id: number
-    date: Date,
-    mood: number,
-    text: string
+    date: string,
+    note: {
+        mood?: number,
+        text?: string
+    } 
 }
