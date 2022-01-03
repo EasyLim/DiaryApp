@@ -3,6 +3,12 @@ import { Diary } from "./Diary"
 
 const app = window.require('@electron/remote')
 
+const homeIcon = require("../static/icons/home.png")
+const diaryIcon = require("../static/icons/diary.png")
+const calendarIcon = require("../static/icons/calendar.png")
+const statisticIcon = require("../static/icons/statistic.png")
+const moreIcon = require("../static/icons/more.png")
+
 export function App () : JSX.Element
 {
     const minimize = () => {
@@ -35,29 +41,41 @@ export function App () : JSX.Element
             </div>
             <div className="content">
                 <div className="leftNavMenu">
-                    <div className="top">
-                        <nav>
-                            <ul>
+                    <nav>
+                        <ul>
+                            <div>
                                 <li>
-                                    <button>ඞ</button>
+                                    <button>
+                                        <img src={homeIcon}/>
+                                    </button>
                                 </li>
                                 <li>
-                                    <button className="active">ඞ</button>
+                                    <button className="active">
+                                        <img src={diaryIcon}/>
+                                    </button>
                                 </li>
                                 <li>
-                                    <button>ඞ</button>
+                                    <button>
+                                        <img src={calendarIcon}/>
+                                    </button>
                                 </li>
                                 <li>
-                                    <button>ඞ</button>
+                                    <button>
+                                        <img src={statisticIcon}/>
+                                    </button>
                                 </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div className="bottom">
-
-                    </div>
+                            </div>
+                            <li>
+                                <button>
+                                    <img src={moreIcon}/>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <div className="pageContent"></div>
+                <div className="pageContent">
+                    <Diary />
+                </div>
             </div>
         </div>
     )

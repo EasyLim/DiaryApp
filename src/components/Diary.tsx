@@ -22,9 +22,11 @@ export function Diary () : JSX.Element
 
     return (
         <div className="Diary">
-            {notes.map((note: INoteProperties) => 
-                <Note noteData={note} key={note.id}/>
-            )}
+            <div className="notes">
+                {notes.map((note: INoteProperties) => 
+                    <Note noteData={note} key={note.id}/>
+                )}
+            </div>
         </div>
     )
 }
