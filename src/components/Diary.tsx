@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { daylioCSV } from "src/parsers/daylioCSV"
 import { INoteProperties } from "./INoteProperties"
 import { Note } from "./Note"
 
@@ -19,11 +20,10 @@ export function Diary () : JSX.Element
 
         if (copyNotes[focusIndex - 2]) copyNotes[focusIndex - 2].position = 'lefter'
         if (copyNotes[focusIndex - 1]) copyNotes[focusIndex - 1].position = 'left'
-        copyNotes[focusIndex].position = 'focus'
+        if (copyNotes[focusIndex]) copyNotes[focusIndex].position = 'focus'
         if (copyNotes[focusIndex + 1]) copyNotes[focusIndex + 1].position = 'right'
         if (copyNotes[focusIndex + 2]) copyNotes[focusIndex + 2].position = 'righter'
         setNotes(copyNotes)
-        console.log(1)
     }
 
     // Parse notes.json
@@ -69,8 +69,8 @@ export function Diary () : JSX.Element
         formatNote.date = new Date(note.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2)
         return formatNote
     })
-    result[0].position = 'focus'
-    result[1].position = 'right'
+    if (result[0]) result[0].position = 'focus'
+    if (result[1]) result[1].position = 'right'
 
     // Put result array to state
     const [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(result)

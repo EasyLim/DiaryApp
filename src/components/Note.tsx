@@ -6,12 +6,12 @@ const path = window.require('path')
 const { app } = window.require('@electron/remote') 
 
 const moreIcon = require('../static/icons/more.png')
+const showIcon = require('../static/icons/show.png')
 
 export function Note (props: {noteData: INoteProperties}) : JSX.Element
 {
     const note = props.noteData
     const moodList = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'settings.json'))).mood
-    console.log(moodList[1])
     return (
         <div className={"Note " + note.position}>
             {!note.note.isEmpty
@@ -30,8 +30,12 @@ export function Note (props: {noteData: INoteProperties}) : JSX.Element
                         </button>
                     </div>
                     
-                    
-                    <p className="note">{note.note.text}</p>
+                    <div className="bottom">
+                        <button>
+                            <img src={showIcon} />
+                            <span>Показать запись</span>
+                        </button>
+                    </div>
                 </>
                 :
                 <p>Здесь пусто(</p>
