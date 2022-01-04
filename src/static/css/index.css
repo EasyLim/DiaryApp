@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     user-select: none;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -155,27 +157,28 @@ li > button > img {
 .Diary > .notes {
     display: flex;
     justify-content: center;
-    height: 300px;
+    height: 42vh;
 }
 
 .Note {
     position: absolute;
     border: 1px solid #9b9b9b;
-    border-radius: 2px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 20px;
     color: #fff;
-    transition: 1s;
-    width: 500px;
-    height: 300px;
+    transition: .3s;
+    width: 60vh;
+    height: 42vh;
+    z-index: -1;
 }
 
 .Note.lefter {
-    transform: translateX(-150%) scale(.5);
+    transform: translateX(-120%) scale(.5);
     opacity: 0;
 }
 
 .Note.left {
-    transform: translateX(-120%) scale(.7);
+    transform: translateX(-90%) scale(.7);
     opacity: .4;
 }
 
@@ -185,11 +188,51 @@ li > button > img {
 }
 
 .Note.right {
-    transform: translateX(120%) scale(.7);
+    transform: translateX(90%) scale(.7);
     opacity: .4;
 }
 
 .Note.righter {
-    transform: translateX(150%) scale(.5);
+    transform: translateX(120%) scale(.5);
     opacity: 0;
+}
+
+.Note > .top {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.Note > .top > .left {
+    display: flex;
+}
+
+.Note > .top > .left > img {
+    margin-right: 15px;
+    width: 60px;
+}
+
+.Note > .top > .left > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Note > .top > .left > div > .date {
+    font-weight: bolder;
+}
+
+.Note > .top > .left > div > .mood {
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.Note > .top > button {
+    background: none;
+    border: none;
+}
+
+.Note > .top > button > img {
+    width: 30px;
 }
