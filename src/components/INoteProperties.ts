@@ -1,7 +1,9 @@
 export interface INoteProperties {
     date: string,
     note: {
-        mood?: number,
-        text?: string
-    } 
+        isEmpty: boolean
+        mood: number | undefined,
+        text: string | undefined
+    },
+    position: string
 }

@@ -114,12 +114,16 @@ body {
     width: 100%;
 }
 
+button:focus {
+    outline: none;
+}
+
 li > button {
     width: 100%;
     height: 85px;
     border: none;
     background: none;
-    opacity: 0.6;
+    opacity: .6;
 }
 
 li > button:hover {
@@ -150,12 +154,42 @@ li > button > img {
 
 .Diary > .notes {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    height: 300px;
 }
 
 .Note {
+    position: absolute;
     border: 1px solid #9b9b9b;
     border-radius: 2px;
     padding: 10px;
     color: #fff;
+    transition: 1s;
+    width: 500px;
+    height: 300px;
+}
+
+.Note.lefter {
+    transform: translateX(-150%) scale(.5);
+    opacity: 0;
+}
+
+.Note.left {
+    transform: translateX(-120%) scale(.7);
+    opacity: .4;
+}
+
+.Note.focus {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+}
+
+.Note.right {
+    transform: translateX(120%) scale(.7);
+    opacity: .4;
+}
+
+.Note.righter {
+    transform: translateX(150%) scale(.5);
+    opacity: 0;
 }

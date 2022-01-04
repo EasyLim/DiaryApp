@@ -13,6 +13,8 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false
         },
+        autoHideMenuBar: true,
+        frame: false,
         titleBarStyle: 'hidden'
     })
 
