@@ -7,6 +7,9 @@ const fs = window.require('fs')
 const path = window.require('path')
 const { app } = window.require('@electron/remote') 
 
+const addIcon = require('../static/icons/add.png')
+const searchIcon = require('../static/icons/search.png')
+
 export function Diary () : JSX.Element
 {
     window.onwheel = (e: WheelEvent) => {
@@ -23,6 +26,16 @@ export function Diary () : JSX.Element
         if (copyNotes[focusIndex]) copyNotes[focusIndex].position = 'focus'
         if (copyNotes[focusIndex + 1]) copyNotes[focusIndex + 1].position = 'right'
         if (copyNotes[focusIndex + 2]) copyNotes[focusIndex + 2].position = 'righter'
+        setNotes(copyNotes)
+    }
+
+    const onClickFocus = (index) => {
+        let copyNotes = [...notes]
+        if (copyNotes[index - 2]) copyNotes[index - 2].position = 'lefter'
+        if (copyNotes[index - 1]) copyNotes[index - 1].position = 'left'
+        if (copyNotes[index]) copyNotes[index].position = 'focus'
+        if (copyNotes[index + 1]) copyNotes[index + 1].position = 'right'
+        if (copyNotes[index + 2]) copyNotes[index + 2].position = 'righter'
         setNotes(copyNotes)
     }
 
@@ -64,22 +77,30 @@ export function Diary () : JSX.Element
 
     // Sort general array and change date to human format
     result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    result = result.map(note => {
-        let formatNote = {...note}
+    let final = result.map((note, index) => {
+        let formatNote = {...note, index: index}
         formatNote.date = new Date(note.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2)
         return formatNote
     })
-    if (result[0]) result[0].position = 'focus'
-    if (result[1]) result[1].position = 'right'
+    if (final[0]) final[0].position = 'focus'
+    if (final[1]) final[1].position = 'right'
 
     // Put result array to state
-    const [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(result)
+    const [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(final)
     return (
         <div className="Diary">
             <div className="notes">
                 {notes.map((note) => 
-                    <Note noteData={note} key={note.date}/>
+                    <Note noteData={note} key={note.date} onClickFocus={onClickFocus}/>
                 )}
+            </div>
+            <div className="diaryButtons">
+                <button>
+                    <img src={searchIcon} />
+                </button>
+                <button>
+                    <img src={addIcon} />
+                </button>
             </div>
         </div>
     )

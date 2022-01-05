@@ -1,4 +1,5 @@
 export interface INoteProperties {
+    index: number
     date: string,
     note: {
         isEmpty: boolean

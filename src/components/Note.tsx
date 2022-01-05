@@ -9,7 +9,7 @@ const showIcon = require('../static/icons/show.png')
 const editIcon = require('../static/icons/edit.png')
 const deleteIcon = require('../static/icons/delete.png')
 
-export function Note (props: {noteData: INoteProperties}) : JSX.Element
+export function Note (props: {noteData: INoteProperties, onClickFocus: Function}) : JSX.Element
 {
     const note = props.noteData
     const moodList = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'settings.json'))).mood
@@ -21,8 +21,12 @@ export function Note (props: {noteData: INoteProperties}) : JSX.Element
 
     if (note.position !== 'focus' && shownOptions == true) setShownOptions(false)
     
+    const onClickUnfocus = () => {
+        props.onClickFocus(note.index)
+    }
+
     return (
-        <div className={"Note " + note.position + (shownOptions && note.position == 'focus' ? ' options' : '')} onClick={showOptions}>
+        <div className={"Note " + note.position + (shownOptions && note.position == 'focus' ? ' options' : '')} onClick={note.position == 'focus' ? showOptions : onClickUnfocus}>
             {!note.note.isEmpty
                 ?
                 <>

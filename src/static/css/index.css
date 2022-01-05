@@ -155,13 +155,44 @@ li > button > img {
 }
 
 .Diary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
+    height: 100%;
 }
 
 .Diary > .notes {
     display: flex;
     justify-content: center;
     height: 42vh;
+}
+
+.Diary > .diaryButtons {
+    position: fixed;
+    top: 50px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 130px;
+}
+
+.Diary > .diaryButtons > button {
+    background: none;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    padding: 10px;
+    opacity: .6;
+    transition: .2s;
+}
+
+.Diary > .diaryButtons > button:hover {
+    opacity: 1;
+}
+
+.Diary > .diaryButtons > button > img {
+    width: 30px
 }
 
 .Note {
@@ -180,6 +211,7 @@ li > button > img {
 .Note.lefter {
     transform: translateX(-120%) scale(.5);
     opacity: 0;
+    pointer-events: none;
 }
 
 .Note.left {
@@ -203,6 +235,7 @@ li > button > img {
 .Note.righter {
     transform: translateX(120%) scale(.5);
     opacity: 0;
+    pointer-events: none;
 }
 
 .Note.options {
