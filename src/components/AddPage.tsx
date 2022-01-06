@@ -15,7 +15,7 @@ export function AddPage (props) : JSX.Element
         let date = new Date()
         const note: INoteProperties = {
             index: 0,
-            date: `${date.getMonth()+1}.${date.getDate()}.${date.getFullYear()}`,
+            date: date.toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2),
             note: {
                 isEmpty: false,
                 mood: Number(mood),
