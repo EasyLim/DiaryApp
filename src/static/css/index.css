@@ -299,10 +299,9 @@ li > button > img {
     pointer-events: none;
 }
 
-.Note > .bottom > .optionsButtons.options{
+.Note > .bottom > .optionsButtons.options {
     transform: translateY(12vh);
     opacity: 1;
-    pointer-events: all;
 }
 
 .Note > .bottom > .optionsButtons > button {
@@ -316,6 +315,10 @@ li > button > img {
     justify-content: center;
     align-items: center;
     transition: .3s;
+}
+
+.Note > .bottom > .optionsButtons.options > button {
+    pointer-events: all;
 }
 
 .Note > .bottom > .optionsButtons > button.delete {
