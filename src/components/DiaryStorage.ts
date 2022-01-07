@@ -26,8 +26,15 @@ export function deleteNote(date: string) {
     writeData(data.filter(note => new Date(note.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2) != date))
 }
 
-function parseDiaryJson(): INoteJson[] {
+export function parseDiaryJson(): INoteJson[] {
     return JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'notes.json'), 'utf-8' ))
+}
+
+export function dateParse(rusDate) {
+    let data = parseDiaryJson()
+    let filtered = data.filter(note => new Date(note.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2) == rusDate)
+    if (filtered.length < 1) return undefined
+    return filtered[0].date
 }
 
 function writeData(data: INoteJson[]) {

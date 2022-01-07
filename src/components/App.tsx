@@ -4,6 +4,7 @@ import { Diary } from "./Diary"
 import { INoteProperties } from "./INoteProperties"
 import { NotePage } from "./NotePage"
 import { getDiaryArray } from "./DiaryStorage"
+import { EditPage } from "./EditPage"
 
 const remoteApp = window.require('@electron/remote')
 
@@ -23,6 +24,7 @@ export function App () : JSX.Element
   
     // Put result array to state
     const [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(getDiaryArray())
+    const [viewNote, setViewNote] = useState({})
 
     const changePage = (page: string) => {
         setPage(page)
@@ -31,9 +33,10 @@ export function App () : JSX.Element
     let getPage = () => {
        
         switch (page) {
-            case 'diary': return <Diary notes={notes} setNotes={setNotes} changePage={changePage} />
-            case 'note': return <NotePage />
+            case 'diary': return <Diary notes={notes} setNotes={setNotes} changePage={changePage} setViewNote={setViewNote}/>
+            case 'note': return <NotePage viewNote={viewNote}/>
             case 'add': return <AddPage notes={notes} setNotes={setNotes} changePage={changePage}/>
+            case 'edit': return <EditPage notes={notes} setNotes={setNotes} changePage={changePage} viewNote={viewNote}/>
         }
     }
 

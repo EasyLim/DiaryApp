@@ -46,7 +46,7 @@ export function Diary (props) : JSX.Element
         <div className="Diary fadeIn">
             <div className="notes">
                 {notes.map((note) => 
-                    <Note noteData={note} key={note.date} setNotes={setNotes} changePage={props.changePage} onClickFocus={onClickFocus}/>
+                    <Note noteData={note} key={note.date} setNotes={setNotes} changePage={props.changePage} onClickFocus={onClickFocus} setViewNote={props.setViewNote}/>
                 )}
             </div>
             <div className="diaryButtons">

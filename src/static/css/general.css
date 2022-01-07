@@ -56,10 +56,11 @@ body {
 
 .buttons {
     display: flex;
-    width: 70px;
+    width: 90px;
     justify-content: space-between;
     align-items: center;
     -webkit-app-region: no-drag;
+    padding: 10px;
 }
 
 .buttons > button {

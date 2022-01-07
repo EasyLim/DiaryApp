@@ -5,10 +5,10 @@ const path = window.require('path')
 const { app } = window.require('@electron/remote')
 
 export class daylioCSV implements IParser{
-    public parse (file: string) : Object[]
+    public parse (file: BinaryType) : Object[]
     {
-        file = file.toString()
-        let ok = file.split('\n')
+        let text = file.toString()
+        let ok = text.split('\n')
                     .slice(1)
                     .map(e => e.split('\"'))
                     .map(e => [...e[0].split(','), e.slice(5, e.length - 1).join("\"")])

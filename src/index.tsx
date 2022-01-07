@@ -6,6 +6,7 @@ import './static/css/general.css'
 import './static/css/diary.css'
 import './static/css/note.css'
 import './static/css/addPage.css'
+import './static/css/notePage.css'
 
 ReactDOM.render(
     <App />,

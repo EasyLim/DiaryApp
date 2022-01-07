@@ -10,7 +10,7 @@ const showIcon = require('../static/icons/show.png')
 const editIcon = require('../static/icons/edit.png')
 const deleteIcon = require('../static/icons/delete.png')
 
-export function Note (props: {noteData: INoteProperties, onClickFocus: Function, setNotes: Function, changePage: Function}) : JSX.Element
+export function Note (props: {noteData: INoteProperties, onClickFocus: Function, setNotes: Function, changePage: Function, setViewNote: Function}) : JSX.Element
 {
     const note = props.noteData
     const moodList = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'settings.json'))).mood
@@ -57,10 +57,10 @@ export function Note (props: {noteData: INoteProperties, onClickFocus: Function,
                     <div className="bottom">
                         <p className="text">{note.note.text}</p>
                         <div className={"optionsButtons" + (shownOptions && note.position == 'focus' ? ' options' : '')}>
-                            <button>
+                            <button onClick={() => { props.changePage('note'); props.setViewNote(note) }}>
                                 <img src={showIcon} />
                             </button>
-                            <button>
+                            <button onClick={() => { props.changePage('edit'); props.setViewNote(note) }}>
                                 <img src={editIcon} />
                             </button>
                             <button className="delete" onClick={ () => { onClickDelete(note.date) } }>
