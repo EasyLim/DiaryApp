@@ -1,10 +1,11 @@
 import React, { FormEvent, useState } from "react"
 import { INoteProperties } from "./INoteProperties"
+import { addNote, getDiaryArray } from "./DiaryStorage"
 
 const fs = window.require('fs')
 const path = window.require('path')
 const { app } = window.require('@electron/remote')
-
+// date.toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2),
 export function AddPage (props) : JSX.Element
 {
     const [mood, setMood] = useState('0')
@@ -15,7 +16,7 @@ export function AddPage (props) : JSX.Element
         let date = new Date()
         const note: INoteProperties = {
             index: 0,
-            date: date.toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2),
+            date: `${date.getMonth()+1}.${date.getDate()}.${date.getFullYear()}`,
             note: {
                 isEmpty: false,
                 mood: Number(mood),
@@ -28,20 +29,17 @@ export function AddPage (props) : JSX.Element
             return note
         })
 
-        props.setNotes([note, ...props.notes])
-        console.log([note, ...props.notes])
+        addNote({date: note.date, mood: note.note.mood, text: note.note.text})
+        props.setNotes(getDiaryArray())
         props.changePage('diary')
-
-        let fileData = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'notes.json'), 'utf-8' ))
-        fileData.push({date: note.date, mood: note.note.mood, text: note.note.text})
-        fs.writeFileSync(path.join(app.getAppPath(), 'notes.json'), JSON.stringify(fileData))
+        
     }
     return (
-        <div className="AddPage">
-            <h1>Страница добавки записи</h1>
+        <div className="AddPage fadeIn">
+            <h1>Добавить запись</h1>
             <form onSubmit={submit}>
-                <select name="mood" onChange={(e) => setMood(e.target.value)}>
-                    <option value="0">-- Выбери настроение --</option>
+                <select defaultValue="0" name="mood" onChange={(e) => setMood(e.target.value)}>
+                    <option disabled value="0">-- Выбери настроение --</option>
                     <option value="5">Отлично</option>
                     <option value="4">Хорошо</option>
                     <option value="3">Так себе</option>

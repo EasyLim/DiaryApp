@@ -14,7 +14,6 @@ export class daylioCSV implements IParser{
                     .map(e => [...e[0].split(','), e.slice(5, e.length - 1).join("\"")])
                     .map(e => [e[0], e[4], e[6]])
                     .map(e => [...e.slice(0, 2), e[2].split('""').join('"')])
-        console.log(ok)
         let notes = []
         for (let data of ok) {
             let date = new Date(data[0])
@@ -32,7 +31,6 @@ export class daylioCSV implements IParser{
             }
             notes.push(note)
         }
-        console.log(JSON.stringify(notes))
         return notes
     }
 }

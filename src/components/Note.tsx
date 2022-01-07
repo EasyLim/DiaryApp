@@ -1,15 +1,16 @@
-import React, { useState } from "react"
+import React, { MouseEventHandler, useState } from "react"
+import { deleteNote, getDiaryArray } from "./DiaryStorage"
 import { INoteProperties } from "./INoteProperties"
 
 const fs = window.require('fs')
 const path = window.require('path')
-const { app } = window.require('@electron/remote') 
+const { app, dialog } = window.require('@electron/remote') 
 
 const showIcon = require('../static/icons/show.png')
 const editIcon = require('../static/icons/edit.png')
 const deleteIcon = require('../static/icons/delete.png')
 
-export function Note (props: {noteData: INoteProperties, onClickFocus: Function}) : JSX.Element
+export function Note (props: {noteData: INoteProperties, onClickFocus: Function, setNotes: Function, changePage: Function}) : JSX.Element
 {
     const note = props.noteData
     const moodList = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'settings.json'))).mood
@@ -23,6 +24,19 @@ export function Note (props: {noteData: INoteProperties, onClickFocus: Function}
     
     const onClickUnfocus = () => {
         props.onClickFocus(note.index)
+    }
+
+    const onClickDelete = (date: string) => {
+        if (dialog.showMessageBoxSync(this, {
+            type: 'question',
+            buttons: ['Нет', 'Да'],
+            title: 'Вы ебобо?',
+            message: 'Вы действительно хотите удалить запись?'
+        }) == 0) return
+
+        deleteNote(date)
+        props.setNotes(getDiaryArray())
+        props.changePage('diary')
     }
 
     return (
@@ -49,7 +63,7 @@ export function Note (props: {noteData: INoteProperties, onClickFocus: Function}
                             <button>
                                 <img src={editIcon} />
                             </button>
-                            <button className="delete">
+                            <button className="delete" onClick={ () => { onClickDelete(note.date) } }>
                                 <img src={deleteIcon} />
                             </button>
                         </div>

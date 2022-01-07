@@ -1,0 +1,143 @@
+.Note {
+    position: absolute;
+    border: 1px solid #9b9b9b;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    transition: .3s;
+    width: 60vh;
+    height: 42vh;
+    overflow: visible;
+    background-color: #101010;
+}
+
+.Note.lefter {
+    transform: translateX(-120%) scale(.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.Note.left {
+    cursor: pointer;
+    transform: translateX(-90%) scale(.7);
+    opacity: .4;
+}
+
+.Note.focus {
+    cursor: pointer;
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+}
+
+.Note.right {
+    cursor: pointer;
+    transform: translateX(90%) scale(.7);
+    opacity: .4;
+}
+
+.Note.righter {
+    transform: translateX(120%) scale(.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.Note.options {
+    transform: translateY(-8vh);
+}
+
+.Note > .top {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.Note > .top > .left {
+    display: flex;
+}
+
+.Note > .top > .left > img {
+    margin-right: 15px;
+    width: 80px;
+}
+
+.Note > .top > .left > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Note > .top > .left > div > .date {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.Note > .top > .left > div > .mood {
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+.Note > .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Note > .bottom > .text {
+    mask: linear-gradient(rgba(255,255,255,1), rgba(16,16,16,0) 75%);
+    height: 30vh;
+    font-size: 20px;
+    white-space: pre-line;
+    width: 100%;
+}
+
+.Note > .bottom > .optionsButtons {
+    display: flex;
+    position: absolute;
+    padding: 50px;
+    bottom: -40px;
+    justify-content: space-between;
+    width: 32vh;
+    transition: .3s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.Note > .bottom > .optionsButtons.options {
+    transform: translateY(12vh);
+    opacity: 1;
+}
+
+.Note > .bottom > .optionsButtons > button {
+    background: #101010;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+
+.Note > .bottom > .optionsButtons.options > button {
+    pointer-events: all;
+}
+
+.Note > .bottom > .optionsButtons > button.delete {
+    border: 1px solid #eb6969;
+}
+
+.Note > .bottom > .optionsButtons > button:hover {
+    box-shadow: #fff 0 0 30px;
+}
+
+.Note > .bottom > .optionsButtons > button.delete:hover {
+    box-shadow: #eb6969 0 0 30px;
+}
+
+.Note > .bottom > .optionsButtons > button > img {
+    width: 20px;
+}

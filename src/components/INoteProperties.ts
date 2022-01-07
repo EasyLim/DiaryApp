@@ -8,3 +8,9 @@ export interface INoteProperties {
     },
     position: string
 }
+
+export interface INoteJson {
+    date: string,
+    mood: number,
+    text: string
+}
