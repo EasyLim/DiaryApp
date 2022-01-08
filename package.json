@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/EasyLim/DiaryApp.git"
   },
-  "main": "electron/main.js",
+  "main": "public/main.js",
   "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
@@ -15,13 +15,29 @@
     "test": "react-scripts start test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start\"",
-    "electron:build": "",
+    "electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js",
     "electron:start": "wait-on tcp:3000 && electron ."
+  },
+  "build": {
+    "extends": null,
+    "appId": "com.easylim.cra",
+    "files": [
+      "dist/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "settings.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "devDependencies": {
     "@types/node": "^17.0.6",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "electron": "^16.0.6",
+    "electron-builder": "^22.14.5",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
@@ -32,7 +48,7 @@
     "@testing-library/user-event": "^13.5.0",
     "concurrently": "^6.5.1",
     "cross-env": "^7.0.3",
-    "electron": "^16.0.5",
+    "electron-is-dev": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",

@@ -38,17 +38,17 @@ export function AddPage (props) : JSX.Element
         <div className="AddPage fadeIn">
             <h1>Добавить запись</h1>
             <form onSubmit={submit}>
-                <input type="date" max={ `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}` } value={ date } onChange={e => setDate(e.target.value)}/>
-                <select defaultValue="0" name="mood" onChange={(e) => setMood(e.target.value)}>
-                    <option disabled value="0">-- Выбери настроение --</option>
+                <input className="border" type="date" max={ `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}` } value={ date } onChange={e => setDate(e.target.value)}/>
+                <p>Выбери настроение:</p>
+                <select className="border" defaultValue="5" name="mood" onChange={(e) => setMood(e.target.value)}>
                     <option value="5">Отлично</option>
                     <option value="4">Хорошо</option>
                     <option value="3">Так себе</option>
                     <option value="2">Плохо</option>
                     <option value="1">Ужасно</option>
                 </select><br />
-                <textarea name="text" onChange={(e) => setText(e.target.value)}></textarea><br />
-                <button type="submit">Сохранить</button>
+                <textarea className="border" name="text" onChange={(e) => setText(e.target.value)}></textarea><br />
+                <button className="border" type="submit">Сохранить</button>
             </form>
         </div>
     )

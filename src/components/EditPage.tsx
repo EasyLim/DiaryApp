@@ -39,8 +39,8 @@ export function EditPage (props) : JSX.Element
         <div className="AddPage fadeIn">
             <h1>Редактирование</h1>
             <form onSubmit={submit}>
-                <select defaultValue="0" name="mood" onChange={(e) => setMood(e.target.value)} value={mood}>
-                    <option disabled value="0">-- Выбери настроение --</option>
+                <label>Выбери настроение:</label>
+                <select defaultValue="5" name="mood" onChange={(e) => setMood(e.target.value)} value={mood}>
                     <option value="5">Отлично</option>
                     <option value="4">Хорошо</option>
                     <option value="3">Так себе</option>

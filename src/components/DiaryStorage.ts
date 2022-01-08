@@ -27,14 +27,18 @@ export function deleteNote(date: string) {
 }
 
 export function parseDiaryJson(): INoteJson[] {
-    return JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'notes.json'), 'utf-8' ))
+    if (!fs.existsSync(path.join(app.getPath("userData"), 'notes.json'))) {
+        fs.writeFileSync(path.join(app.getPath("userData"), 'notes.json'), JSON.stringify([]))
+    }
+    return JSON.parse(fs.readFileSync(path.join(app.getPath("userData"), 'notes.json'), 'utf-8' ))
 }
 
 function writeData(data: INoteJson[]) {
-    fs.writeFileSync(path.join(app.getAppPath(), 'notes.json'), JSON.stringify(data))
+    fs.writeFileSync(path.join(app.getPath("userData"), 'notes.json'), JSON.stringify(data))
 }
 
 function formatDiaryArray(data: INoteJson[]): INoteProperties[] {
+    if (data.length == 0) return []
     // Sort parsed days for counting skipped days later
     data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
