@@ -8,15 +8,15 @@ const { app } = window.require('@electron/remote')
 
 export function AddPage (props) : JSX.Element
 {
+    const [date, setDate] = useState(`${new Date(props.date).getFullYear()}-${String(new Date(props.date).getMonth()+1).padStart(2, "0")}-${String(new Date(props.date).getDate()).padStart(2, "0")}`)
     const [mood, setMood] = useState('0')
     const [text, setText] = useState('')
-
     const submit = (e: FormEvent) => {
         e.preventDefault()
-        let date = new Date()
+        let dateTypeDate = new Date(date)
         const note: INoteProperties = {
             index: 0,
-            date: `${date.getMonth()+1}.${date.getDate()}.${date.getFullYear()}`,
+            date: `${dateTypeDate.getMonth()+1}.${dateTypeDate.getDate()}.${dateTypeDate.getFullYear()}`,
             note: {
                 isEmpty: false,
                 mood: Number(mood),
@@ -32,12 +32,13 @@ export function AddPage (props) : JSX.Element
         addNote({date: note.date, mood: note.note.mood, text: note.note.text})
         props.setNotes(getDiaryArray())
         props.changePage('diary')
-        
+
     }
     return (
         <div className="AddPage fadeIn">
             <h1>Добавить запись</h1>
             <form onSubmit={submit}>
+                <input type="date" max={ `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}` } value={ date } onChange={e => setDate(e.target.value)}/>
                 <select defaultValue="0" name="mood" onChange={(e) => setMood(e.target.value)}>
                     <option disabled value="0">-- Выбери настроение --</option>
                     <option value="5">Отлично</option>

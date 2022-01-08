@@ -65,7 +65,7 @@ body {
 
 .buttons > button {
     border: none;
-    border-radius: 100%;
+    border-radius: 50%;
     width: 15px;
     height: 15px;
     transition: .5s;

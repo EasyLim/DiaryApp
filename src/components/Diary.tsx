@@ -10,6 +10,7 @@ const searchIcon = require('../static/icons/search.png')
 export function Diary (props) : JSX.Element
 {
     let notes = props.notes
+    console.log()
     let setNotes = props.setNotes
 
     window.onwheel = (e: WheelEvent) => {
@@ -46,14 +47,14 @@ export function Diary (props) : JSX.Element
         <div className="Diary fadeIn">
             <div className="notes">
                 {notes.map((note) => 
-                    <Note noteData={note} key={note.date} setNotes={setNotes} changePage={props.changePage} onClickFocus={onClickFocus} setViewNote={props.setViewNote}/>
+                    <Note noteData={note} key={note.date} setNotes={setNotes} changePage={props.changePage} onClickFocus={onClickFocus} setViewNote={props.setViewNote} setSkippedDayDate={props.setSkippedDayDate}/>
                 )}
             </div>
             <div className="diaryButtons">
                 <button>
                     <img src={searchIcon} />
                 </button>
-                <button onClick={() => props.changePage('add')}>
+                <button onClick={() => {props.setSkippedDayDate(new Date().toISOString().split('T')[0]); props.changePage('add')}}>
                     <img src={addIcon} />
                 </button>
             </div>

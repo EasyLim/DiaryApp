@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react"
 import { INoteProperties } from "./INoteProperties"
-import { addNote, deleteNote, getDiaryArray, parseDiaryJson, dateParse } from "./DiaryStorage"
+import { addNote, deleteNote, getDiaryArray, parseDiaryJson } from "./DiaryStorage"
 
 const fs = window.require('fs')
 const path = window.require('path')
@@ -28,16 +28,16 @@ export function EditPage (props) : JSX.Element
             note.index++
             return note
         })
-        const dateParsed = dateParse(note.date)
+        const noteDate = note.date
         deleteNote(note.date)
-        addNote({date: dateParsed, mood: note.note.mood, text: note.note.text})
+        addNote({date: noteDate, mood: note.note.mood, text: note.note.text})
         props.setNotes(getDiaryArray())
         props.changePage('diary')
         
     }
     return (
         <div className="AddPage fadeIn">
-            <h1>Добавить запись</h1>
+            <h1>Редактирование</h1>
             <form onSubmit={submit}>
                 <select defaultValue="0" name="mood" onChange={(e) => setMood(e.target.value)} value={mood}>
                     <option disabled value="0">-- Выбери настроение --</option>

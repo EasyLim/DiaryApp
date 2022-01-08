@@ -25,6 +25,7 @@ export function App () : JSX.Element
     // Put result array to state
     const [notes, setNotes]: [INoteProperties[], React.Dispatch<INoteProperties[]>] = useState(getDiaryArray())
     const [viewNote, setViewNote] = useState({})
+    const [skippedDayDate, setSkippedDayDate] = useState('')
 
     const changePage = (page: string) => {
         setPage(page)
@@ -33,9 +34,9 @@ export function App () : JSX.Element
     let getPage = () => {
        
         switch (page) {
-            case 'diary': return <Diary notes={notes} setNotes={setNotes} changePage={changePage} setViewNote={setViewNote}/>
+            case 'diary': return <Diary notes={notes} setNotes={setNotes} changePage={changePage} setViewNote={setViewNote} setSkippedDayDate={setSkippedDayDate}/>
             case 'note': return <NotePage viewNote={viewNote}/>
-            case 'add': return <AddPage notes={notes} setNotes={setNotes} changePage={changePage}/>
+            case 'add': return <AddPage notes={notes} setNotes={setNotes} changePage={changePage} date={skippedDayDate}/>
             case 'edit': return <EditPage notes={notes} setNotes={setNotes} changePage={changePage} viewNote={viewNote}/>
         }
     }

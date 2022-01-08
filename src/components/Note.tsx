@@ -10,7 +10,7 @@ const showIcon = require('../static/icons/show.png')
 const editIcon = require('../static/icons/edit.png')
 const deleteIcon = require('../static/icons/delete.png')
 
-export function Note (props: {noteData: INoteProperties, onClickFocus: Function, setNotes: Function, changePage: Function, setViewNote: Function}) : JSX.Element
+export function Note (props) : JSX.Element
 {
     const note = props.noteData
     const moodList = JSON.parse(fs.readFileSync(path.join(app.getAppPath(), 'settings.json'))).mood
@@ -39,6 +39,11 @@ export function Note (props: {noteData: INoteProperties, onClickFocus: Function,
         props.changePage('diary')
     }
 
+    const onClickAdd = () => {
+        props.setSkippedDayDate(note.date);
+        props.changePage('add');
+    }
+
     return (
         <div className={"Note " + note.position + (shownOptions && note.position == 'focus' ? ' options' : '')} onClick={note.position == 'focus' ? showOptions : onClickUnfocus}>
             {!note.note.isEmpty
@@ -48,7 +53,7 @@ export function Note (props: {noteData: INoteProperties, onClickFocus: Function,
                         <div className="left">
                             <img src={require(`../static/icons/${note.note.mood}.svg`)} />
                             <div>
-                                <p className="date">{note.date}</p>
+                                <p className="date">{new Date(note.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2)}</p>
                                 <p className="mood" style={{color: moodList[note.note.mood].color}}>{moodList[note.note.mood].text}</p>
                             </div>
                         </div>
@@ -70,8 +75,26 @@ export function Note (props: {noteData: INoteProperties, onClickFocus: Function,
                     </div>
                 </>
                 :
-                <p>Здесь пусто(</p>
+                <>
+                    <div className="top">
+                        <div className="left">
+                            <div>
+                                <p className="date muted">{new Date(note.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2)}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="emptyNote">
+                        <button className="addButton muted" onClick={ onClickAdd }>
+                            <img src={require(`../static/icons/add.png`)} />
+                        </button>
+                    </div>
+                </>
             }
         </div>
     )
+}
+
+function changePage(arg0: string) {
+    throw new Error("Function not implemented.")
 }
