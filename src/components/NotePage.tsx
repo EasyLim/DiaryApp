@@ -13,12 +13,12 @@ export function NotePage (props) : JSX.Element
                 <div className="left">
                     <img src={require(`../static/icons/${props.viewNote.note.mood}.svg`)} />
                     <div>
-                        <p className="date">{props.viewNote.date}</p>
+                        <p className="date">{new Date(props.viewNote.date).toLocaleDateString("ru", {year: 'numeric', month: 'long', day: 'numeric'}).slice(0, -2)}</p>
                         <p className="mood" style={{color: moodList[props.viewNote.note.mood].color}}>{moodList[props.viewNote.note.mood].text}</p>
                     </div>
                 </div>
             </div>
-            <p className="text">{props.viewNote.note.text}</p>
+            <p className="noteViewText">{props.viewNote.note.text}</p>
         </div>
     )
 }

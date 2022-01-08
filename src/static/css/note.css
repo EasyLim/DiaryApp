@@ -170,3 +170,6 @@ button.muted:hover {
     width: 100px;
 }
 
+.noteViewText {
+    white-space: pre-line;
+}
