@@ -9,7 +9,7 @@ const { app } = window.require('@electron/remote')
 export function AddPage (props) : JSX.Element
 {
     const [date, setDate] = useState(`${new Date(props.date).getFullYear()}-${String(new Date(props.date).getMonth()+1).padStart(2, "0")}-${String(new Date(props.date).getDate()).padStart(2, "0")}`)
-    const [mood, setMood] = useState('0')
+    const [mood, setMood] = useState('5')
     const [text, setText] = useState('')
     const submit = (e: FormEvent) => {
         e.preventDefault()
